@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Awareness & Detection</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(135deg, #fff0f6 0%, #fde2e4 100%);
+            min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+            font-size: 16px;
+            animation: fadeInBody 1.2s ease;
+        }
+
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .main-title {
+            text-align: center;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            animation: fadeInDown 1.1s cubic-bezier(.77,0,.18,1) 0.2s both;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        .title-main {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #f8bbd0 0%, #f48fb1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 1px 8px #fde2e4;
+        }
+
+        .title-highlight {
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #f06292 30%, #f8bbd0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 1px 10px #fde2e4;
+            letter-spacing: 2px;
+        }
+
+        .title-sub {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, #f8bbd0 0%, #f48fb1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 1px 6px #fde2e4;
+            letter-spacing: 1.5px;
+        }
+
+        .marquee-container {
+            width: 100vw;
+            overflow: hidden;
+            background: linear-gradient(90deg, #fce4ec 0%, #f8bbd0 100%);
+            color: #880e4f;
+            padding: 8px 0;
+            border-radius: 0 0 24px 24px;
+            box-shadow: 0 6px 24px rgba(248, 187, 208, 0.25);
+            margin-bottom: 18px;
+        }
+
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100vw;
+            animation: marquee 22s linear infinite;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 6px #f8bbd0;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+            animation: fadeInUp 1.2s cubic-bezier(.77,0,.18,1) 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        .sidebar {
+            background: rgba(255,240,246,0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(248, 187, 208, 0.35), 0 1.5px 8px #f8bbd0;
+            border: 2.5px solid #f8bbd0aa;
+            position: relative;
+            overflow: hidden;
+            padding: 28px 20px;
+            width: 520px;
+            max-width: 94vw;
+            text-align: center;
+        }
+
+        .sidebar::before {
+            content: "";
+            position: absolute;
+            top: -60px; left: -60px;
+            width: 180px; height: 180px;
+            background: radial-gradient(circle, #f8bbd0 0%, transparent 70%);
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        .sidebar h2 {
+            background: linear-gradient(90deg, #f48fb1 0%, #ec407a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-shadow: 0 1px 8px #fde2e4;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .sidebar h2 .fa-bolt {
+            color: #f06292;
+            font-size: 1.3em;
+            filter: drop-shadow(0 1px 4px #fde2e4);
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            z-index: 1;
+            position: relative;
+        }
+
+        .sidebar li {
+            margin: 24px 0;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 0;
+            background: linear-gradient(90deg, #f8bbd0 0%, #f06292 100%);
+            color: #fff;
+            border-radius: 16px;
+            font-size: 1.13rem;
+            font-weight: 700;
+            box-shadow: 0 2px 16px rgba(248, 187, 208, 0.25);
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+            gap: 12px;
+        }
+
+        .sidebar a:hover {
+            background: linear-gradient(90deg, #f06292 0%, #f8bbd0 100%);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 4px 24px #f0629240;
+        }
+
+        .sidebar a .fa {
+            font-size: 1.2em;
+            margin-right: 6px;
+        }
+
+        .bc-logo {
+            height: 70px;
+            width: auto;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px #f8bbd055;
+            background: #fff0f6;
+            padding: 6px 10px;
+            transition: transform 0.2s;
+        }
+
+        .bc-logo:hover {
+            transform: scale(1.06) rotate(-2deg);
+            box-shadow: 0 4px 24px #f0629240;
+        }
+
+        footer {
+            width: 100vw;
+            background: linear-gradient(90deg, #fce4ec 0%, #f8bbd0 25%, #f48fb1 50%, #f06292 75%, #ec407a 100%);
+            color: #880e4f;
+            text-align: center;
+            padding: 16px 0;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-radius: 20px 20px 0 0;
+            margin-top: 48px;
+            box-shadow: 0 -4px 32px rgba(248, 187, 208, 0.18);
+            position: relative;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            left: 50%; top: 0;
+            transform: translateX(-50%);
+            width: 80vw; height: 100%;
+            background: radial-gradient(circle, #f8bbd0 0%, transparent 80%);
+            opacity: 0.13;
+            z-index: 0;
+        }
+
+        footer * {
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            color: #880e4f;
+            margin: 0 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #f06292;
+        }
+
+        @media (max-width: 768px) {
+            .title-main, .title-highlight, .title-sub {
+                font-size: 1.3rem;
+            }
+            .marquee { font-size: 0.9rem; }
+            .sidebar h2 { font-size: 1.3rem; }
+            .sidebar a { font-size: 1rem; padding: 14px 0; }
+            .floating-ribbon { font-size: 0.9rem; padding: 7px 16px 7px 10px; top: 10px; left: 10px;}
+            .sidebar { padding: 18px 6px; }
+            .main-title {
+                gap: 10px;
+            }
+            .bc-logo {
+                height: 38px;
+                padding: 2px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-title">
+        <img class="bc-logo" src="https://www.citypng.com/public/uploads/preview/transparent-hd-breast-cancer-care-logo-7017516947781007we1t9lcru.png" alt="Breast Cancer Logo">
+        <div>
+            <span class="title-main">BREAST</span>
+            <span class="title-highlight">CANCER</span>
+            <span class="title-main">AWARENESS</span>
+            <span class="title-sub">& DETECTION</span>
+        </div>
+    </div>
+
+    <div class="marquee-container">
+        <div class="marquee">
+            <i class="fa-solid fa-ribbon"></i> Raise Awareness, Promote Early Detection &nbsp; | &nbsp;
+            <i class="fa-solid fa-heart-pulse"></i> Learn about Breast Cancer Symptoms & Prevention &nbsp; | &nbsp;
+            <i class="fa-solid fa-robot"></i> Try our <b>AI-based Breast Cancer Prediction Tool</b> &nbsp; | &nbsp;
+            <i class="fa-solid fa-hand-holding-heart"></i> Early Diagnosis Can <b>Save Lives</b> 💖
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="sidebar">
+            <h2><i class="fa-solid fa-bolt"></i> Get Started</h2>
+            <ul>
+                <li>
+                    <a href="/check_breast_cancer">
+                        <i class="fa-solid fa-microscope"></i>
+                        AI-BASED Breast Cancer Detector
+                    </a>
+                </li>
+                <li>
+                    <a href="https://breastcancerawarness.netlify.app/" target="_blank">
+                        <i class="fa-solid fa-book-open"></i>
+                        Know About Breast Cancer
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <footer>
+        Made with <span style="color:#f06292;">&#10084;&#65039;</span> by Sandesh H R<br>
+        <a href="https://github.com/sandy334" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a> |
+        <a href="https://www.linkedin.com/in/sandesh-hr-32262a220/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a> |
+        <a href="https://sandeshportfoliofrontend.netlify.app" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe"></i> Portfolio</a> |
+        <a href="mailto:sandeshhr334@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+    </footer>
+</body>
+</html>

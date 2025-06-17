@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Breast Cancer Detector</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+      min-height: 100vh;
+      width: 100vw;
+      overflow-x: hidden;
+    }
+
+    .main-title {
+      text-align: center;
+      margin-top: 32px;
+      margin-bottom: 18px;
+      letter-spacing: 2px;
+    }
+
+    .title-main {
+      font-size: 2.7rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #ec407a 0%, #ad1457 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      margin: 0 10px;
+      text-shadow: 0 2px 16px #fce4ec;
+    }
+
+    .title-highlight {
+      font-size: 3.2rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #f48fb1 30%, #d81b60 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      margin: 0 10px;
+      letter-spacing: 4px;
+      text-shadow: 0 2px 18px #fce4ec;
+    }
+
+    .title-sub {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #f48fb1 0%, #d81b60 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      margin-top: 10px;
+      letter-spacing: 2px;
+    }
+
+    .content {
+      max-width: 650px;
+      width: 100%;
+      background: #fff0f6;
+      border-radius: 18px;
+      padding: 38px 32px 32px 32px;
+      box-shadow: 0 8px 32px 0 rgba(216, 27, 96, 0.18);
+      margin: 32px auto 32px auto;
+      border: 2px solid #ec407a44;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.3rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ec407a 0%, #d81b60 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 12px #fce4ec;
+    }
+
+    .predict-note {
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      color: #880e4f;
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
+      background-clip: unset;
+      text-fill-color: unset;
+      text-shadow: 0 2px 12px #fce4ec;
+    }
+
+    .model-link-note {
+      display: block;
+      text-align: center;
+      margin: 18px 0 28px 0;
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #ec407a 0%, #d81b60 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      text-decoration: underline;
+      transition: text-shadow 0.2s;
+      text-shadow: 0 2px 12px #d81b6044;
+    }
+
+    .model-link-note:hover {
+      text-shadow: 0 4px 24px #f48fb1, 0 2px 12px #d81b60;
+      cursor: pointer;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #ad1457;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1.5px solid #ce93d8;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #fce4ec;
+      color: #880e4f;
+      transition: border 0.2s, background 0.2s;
+    }
+
+    input[type="number"]:focus {
+      border: 2px solid #d81b60;
+      outline: none;
+      background: #f8bbd0;
+    }
+
+    button {
+      width: 100%;
+      padding: 22px 0;
+      background: linear-gradient(90deg, #d81b60 0%, #f48fb1 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.7rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      box-shadow: 0 2px 16px rgba(216, 27, 96, 0.4);
+      cursor: pointer;
+      margin-top: 18px;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #f48fb1 0%, #d81b60 100%);
+      transform: translateY(-2px) scale(1.04);
+    }
+
+    #result {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 1.3rem;
+      color: #d81b60;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 700px) {
+      .content {
+        padding: 18px 4vw 18px 4vw;
+        margin: 12px 0;
+      }
+
+      .main-title {
+        margin-top: 14px;
+      }
+
+      .title-main,
+      .title-highlight {
+        font-size: 1.3rem;
+      }
+
+      .title-highlight {
+        font-size: 1.7rem;
+      }
+
+      .title-sub {
+        font-size: 1rem;
+      }
+
+      h1 {
+        font-size: 1.2rem;
+      }
+
+      button {
+        font-size: 1.1rem;
+        padding: 12px 0;
+      }
+
+      .model-link-note {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-title">
+    <span class="title-main">AI-BASED</span>
+    <span class="title-highlight">BREAST CANCER</span>
+    <span class="title-main">DETECTOR</span>
+    <span class="title-sub">ML Model Prediction</span>
+  </div>
+  <div class="content">
+    <div class="predict-note">
+      Enter all 30 tumor features below to predict the risk of <span
+        style="color:#ad1457;font-weight:900;">Malignant</span> or <span
+        style="color:#f48fb1;font-weight:900;">Benign</span> breast cancer.
+    </div>
+    <a class="model-link-note" href="/model" target="_blank">🔎 Check the Model (Feature Details)</a>
+    <form id="breastCancerForm" action="/check_breast_cancer" method="POST">
+      <!-- Form fields (same as before) -->
+      <label for="radius_mean">Radius Mean:</label>
+      <input type="number" id="radius_mean" name="radius_mean" required step="0.01" />
+
+      <label for="texture_mean">Texture Mean:</label>
+      <input type="number" id="texture_mean" name="texture_mean" required step="0.01" />
+
+      <label for="perimeter_mean">Perimeter Mean:</label>
+      <input type="number" id="perimeter_mean" name="perimeter_mean" required step="0.01" />
+
+      <label for="area_mean">Area Mean:</label>
+      <input type="number" id="area_mean" name="area_mean" required step="0.01" />
+
+      <label for="smoothness_mean">Smoothness Mean:</label>
+      <input type="number" id="smoothness_mean" name="smoothness_mean" required step="0.01" />
+
+      <label for="compactness_mean">Compactness Mean:</label>
+      <input type="number" id="compactness_mean" name="compactness_mean" required step="0.01" />
+
+      <label for="concavity_mean">Concavity Mean:</label>
+      <input type="number" id="concavity_mean" name="concavity_mean" required step="0.01" />
+
+      <label for="concave_points_mean">Concave Points Mean:</label>
+      <input type="number" id="concave_points_mean" name="concave_points_mean" required step="0.01" />
+
+      <label for="symmetry_mean">Symmetry Mean:</label>
+      <input type="number" id="symmetry_mean" name="symmetry_mean" required step="0.01" />
+
+      <label for="fractal_dimension_mean">Fractal Dimension Mean:</label>
+      <input type="number" id="fractal_dimension_mean" name="fractal_dimension_mean" required step="0.01" />
+
+      <label for="radius_se">Radius SE:</label>
+      <input type="number" id="radius_se" name="radius_se" required step="0.01" />
+
+      <label for="texture_se">Texture SE:</label>
+      <input type="number" id="texture_se" name="texture_se" required step="0.01" />
+
+      <label for="perimeter_se">Perimeter SE:</label>
+      <input type="number" id="perimeter_se" name="perimeter_se" required step="0.01" />
+
+      <label for="area_se">Area SE:</label>
+      <input type="number" id="area_se" name="area_se" required step="0.01" />
+
+      <label for="smoothness_se">Smoothness SE:</label>
+      <input type="number" id="smoothness_se" name="smoothness_se" required step="0.01" />
+
+      <label for="compactness_se">Compactness SE:</label>
+      <input type="number" id="compactness_se" name="compactness_se" required step="0.01" />
+
+      <label for="concavity_se">Concavity SE:</label>
+      <input type="number" id="concavity_se" name="concavity_se" required step="0.01" />
+
+      <label for="concave_points_se">Concave Points SE:</label>
+      <input type="number" id="concave_points_se" name="concave_points_se" required step="0.01" />
+
+      <label for="symmetry_se">Symmetry SE:</label>
+      <input type="number" id="symmetry_se" name="symmetry_se" required step="0.01" />
+
+      <label for="fractal_dimension_se">Fractal Dimension SE:</label>
+      <input type="number" id="fractal_dimension_se" name="fractal_dimension_se" required step="0.01" />
+
+      <label for="radius_worst">Radius Worst:</label>
+      <input type="number" id="radius_worst" name="radius_worst" required step="0.01" />
+
+      <label for="texture_worst">Texture Worst:</label>
+      <input type="number" id="texture_worst" name="texture_worst" required step="0.01" />
+
+      <label for="perimeter_worst">Perimeter Worst:</label>
+      <input type="number" id="perimeter_worst" name="perimeter_worst" required step="0.01" />
+
+      <label for="area_worst">Area Worst:</label>
+      <input type="number" id="area_worst" name="area_worst" required step="0.01" />
+
+      <label for="smoothness_worst">Smoothness Worst:</label>
+      <input type="number" id="smoothness_worst" name="smoothness_worst" required step="0.01" />
+
+      <label for="compactness_worst">Compactness Worst:</label>
+      <input type="number" id="compactness_worst" name="compactness_worst" required step="0.01" />
+
+      <label for="concavity_worst">Concavity Worst:</label>
+      <input type="number" id="concavity_worst" name="concavity_worst" required step="0.01" />
+
+      <label for="concave_points_worst">Concave Points Worst:</label>
+      <input type="number" id="concave_points_worst" name="concave_points_worst" required step="0.01" />
+
+      <label for="symmetry_worst">Symmetry Worst:</label>
+      <input type="number" id="symmetry_worst" name="symmetry_worst" required step="0.01" />
+
+      <label for="fractal_dimension_worst">Fractal Dimension Worst:</label>
+      <input type="number" id="fractal_dimension_worst" name="fractal_dimension_worst" required step="0.01" />
+
+      <button type="submit">Predict</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+  <script src="static/script.js"></script>
+</body>
+
+</html>

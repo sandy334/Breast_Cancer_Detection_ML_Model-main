@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Model Explanation - Breast Cancer Detection</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to right, #fffafc, #ffeef5);
+      color: #5a3d4b;
+      box-sizing: border-box;
+    }
+
+    header {
+      background: linear-gradient(to right, #ffe4ec, #ffd8e4);
+      color: #663c49;
+      padding: 2rem 1rem 1.5rem;
+      text-align: center;
+      border-radius: 0 0 30px 30px;
+      box-shadow: 0 4px 20px rgba(255, 182, 193, 0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #a86478;
+    }
+
+    main {
+      padding: 2rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .left-content,
+    .right-content {
+      background-color: #fff7fa;
+      border: 1px solid #fcdce4;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(255, 192, 203, 0.15);
+      padding: 2rem;
+      flex: 1 1 550px;
+      max-width: 700px;
+    }
+
+    h2 {
+      color: #b3748f;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    p, li {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #5f4a54;
+    }
+
+    .feature-explanation,
+    .feature-importance-details {
+      background-color: #fff0f6;
+      border-left: 5px solid #f8c2d0;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      border-radius: 12px;
+    }
+
+    .feature-list {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1px 8px rgba(255, 192, 203, 0.1);
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-list ul {
+      padding-left: 1.5rem;
+    }
+
+    .graph-placeholder {
+      background-color: #ffe9f1;
+      border: 2px dashed #f8c2d0;
+      border-radius: 12px;
+      text-align: center;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .graph-placeholder img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(255, 182, 193, 0.25);
+    }
+
+    a {
+      color: #bb6f8d;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 1rem;
+      padding: 1.5rem;
+      color: #7c5a67;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .left-content,
+      .right-content {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Breast Cancer Detection - Model Overview</h1>
+</header>
+
+<main>
+  <div class="left-content">
+    <section>
+      <h2>About the Dataset</h2>
+      <p>
+        This model is trained on the <strong>Breast Cancer Wisconsin (Diagnostic) Dataset</strong>, containing 569 samples
+        with 30 numerical features from cell nuclei in digitized images. It predicts whether a tumor is <strong>malignant</strong> or <strong>benign</strong>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Feature Information</h2>
+      <div class="feature-explanation">
+        <strong>Key Descriptions:</strong><br><br>
+        <b>Radius:</b> Distance from center to edge.<br>
+        <b>Texture:</b> Pixel intensity variation.<br>
+        <b>Perimeter:</b> Outline length.<br>
+        <b>Area:</b> Size of the tumor.<br>
+        <b>Smoothness:</b> Edge regularity.<br>
+        <b>Compactness:</b> Shape tightness.<br>
+        <b>Concavity:</b> Indentations in contour.<br>
+        <b>Concave Points:</b> Number of concave parts.<br>
+        <b>Symmetry:</b> Shape balance.<br>
+        <b>Fractal Dimension:</b> Border complexity.
+      </div>
+      <div class="feature-list">
+        <ul>
+          <li>Radius (mean, se, worst)</li>
+          <li>Texture (mean, se, worst)</li>
+          <li>Perimeter, Area, Smoothness</li>
+          <li>Compactness, Concavity</li>
+          <li>Concave Points, Symmetry</li>
+          <li>Fractal Dimension</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Model Prediction</h2>
+      <p>
+        The model uses a combination of the 30 features. After training, it learns patterns that help distinguish between
+        benign (0) and malignant (1) tumors. New input data is then used for prediction using this learned knowledge.
+      </p>
+    </section>
+  </div>
+
+  <div class="right-content">
+    <section>
+      <h2>Feature Importance</h2>
+      <div class="graph-placeholder">
+        <img src="{{ url_for('static', filename='feature.png') }}" alt="Feature Importance Graph">
+      </div>
+      <div class="feature-importance-details">
+        <p><strong>Most Influential Features:</strong></p>
+        <ul>
+          <li>Worst Radius & Worst Perimeter</li>
+          <li>Worst Area & Mean Area</li>
+          <li>Worst Concave Points</li>
+          <li>Worst Texture</li>
+        </ul>
+        <p>
+          <em>“Worst” values refer to the largest values across the tumor profile and tend to hold stronger predictive power.</em>
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Credits</h2>
+      <p>
+        Dataset provided by Dr. W. H. Wolberg et al.<br>
+        Source: <a href="https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)" target="_blank">UCI ML Repository</a>
+      </p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  © 2025 Breast Cancer Detection Project | Empowered by Compassion & AI
+</footer>
+
+</body>
+</html>

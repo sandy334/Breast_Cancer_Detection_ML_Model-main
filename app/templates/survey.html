@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Detection Survey</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff0f5; /* light lavender pink */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .content {
+            max-width: 600px;
+            width: 100%;
+            background-color: #ffe6eb; /* light rose pink */
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+        }
+        h2 {
+            text-align: center;
+            color: #cc0066; /* deep pink */
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+        .image-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .image-list li {
+            margin: 10px 0;
+            cursor: pointer;
+            color: #d63384; /* medium pink */
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 10px 14px;
+            border-radius: 6px;
+            background-color: #fce4ec; /* very soft pink */
+            transition: background 0.3s, color 0.3s;
+        }
+        .image-list li:hover {
+            color: #fff;
+            background: #c2185b; /* dark pink */
+        }
+        #graphDisplay {
+            margin-top: 25px;
+            text-align: center;
+        }
+        #graphDisplay img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 700px) {
+            .content {
+                max-width: 95vw;
+                padding: 18px;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .image-list li {
+                font-size: 1rem;
+                padding: 8px 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            .content {
+                padding: 10px;
+                border-radius: 8px;
+            }
+            h2 {
+                font-size: 1.2rem;
+            }
+            .image-list li {
+                font-size: 0.95rem;
+                padding: 6px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h2>Survey: Cancer Detection Feature Insights</h2>
+        <ul class="image-list">
+            <li onclick="showGraph('mean_radius.png')">Mean Radius vs Cancer</li>
+            <li onclick="showGraph('mean_texture.png')">Mean Texture vs Cancer</li>
+            <li onclick="showGraph('mean_perimeter.png')">Mean Perimeter vs Cancer</li>
+            <li onclick="showGraph('mean_area.png')">Mean Area vs Cancer</li>
+            <li onclick="showGraph('mean_smoothness.png')">Mean Smoothness vs Cancer</li>
+            <li onclick="showGraph('compactness.png')">Compactness vs Cancer</li>
+        </ul>
+        <div id="graphDisplay">
+            <img id="graphImage" src="" alt="Graph will be displayed here" style="display:none;" />
+        </div>
+    </div>
+    <script>
+        function showGraph(imageName) {
+            const imgElement = document.getElementById('graphImage');
+            imgElement.src = `static/img/${imageName}`;
+            imgElement.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
