@@ -12,6 +12,9 @@
   <img src="app/static/images/preview.png" alt="Project Preview" width="600">
 </p>
 
+## 🌐 Live Demo
+Try out the live application: [Breast Cancer Detection App](https://breast-cancer-prediction-detection.onrender.com/)
+
 ## 🎯 Key Features
 
 - **AI-Powered Detection**
