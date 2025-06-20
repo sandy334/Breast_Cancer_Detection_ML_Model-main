@@ -87,6 +87,12 @@ python app.py
 5. **Access the Application**
 Open your browser and navigate to `http://localhost:5000`
 
+## 💻 Webpage Design Preview
+[Webpage Design] https://github.com/sandy334/Breast_Cancer_Detection_ML_Model-main/blob/main/Web%20page%201.png
+
+## 🔗 Live Figma Design
+[Figma Webpage Design Preview] https://www.figma.com/design/YjgjZ4JcoskzgrGqV4mX5h/Untitled?node-id=24-3&t=NzSSwSpqj6aqVEqV-1
+
 ## 📊 Machine Learning Model
 
 ### Dataset
