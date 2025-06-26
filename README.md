@@ -91,7 +91,7 @@ Open your browser and navigate to `http://localhost:5000`
 [Webpage Design] https://github.com/sandy334/Breast_Cancer_Detection_ML_Model-main/blob/main/Web%20page%201.png
 
 ## 🔗 Live Figma Design
-[Figma Webpage Design Preview] https://www.figma.com/design/YjgjZ4JcoskzgrGqV4mX5h/Untitled?node-id=24-3&t=NzSSwSpqj6aqVEqV-1
+[Figma Webpage Design Preview](https://www.figma.com/proto/YjgjZ4JcoskzgrGqV4mX5h/Untitled?node-id=24-3&t=FqCFUKIAAiAvpO75-1&scaling=min-zoom&content-scaling=fixed&page-id=24%3A2&starting-point-node-id=24%3A3)
 
 ## 📊 Machine Learning Model
 
